@@ -6,18 +6,10 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
 #include "level.h"
-
-
 #include <iostream>
 
-
-
 using namespace std;
-
-
-
 
 
 // Std - Constructor
@@ -25,18 +17,13 @@ Level::Level()
 {
 	points = rows * cols;
 
-	
-
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < cols; j++)
 		{
 			levelPoints[i][j] = char(0);
 		}
-	}
-
-
-	
+	}	
 }
 
 // Allg. Constructor
@@ -71,6 +58,9 @@ void Level::drawBoundaries()
 	}
 }
 
+
+// Method for update all items in the game
+// Boundieres, Snake, Food etc.
 void Level::updateLevel()
 {
 	int snakeIndex = 0;
@@ -106,16 +96,16 @@ void Level::updateLevel()
 					(snakeIndex > 0))
 				{
 					levelPoints[i][j] = SNAKEBODY;
-					//snakeIndex++;
 				}
 			}
 		}
 	}
 }
 
+
+// Mehtod for drawing all items in the console
 void Level::drawLevel()
 {
-
 	system("cls");
 	for (int i = 0; i < rows; i++)
 	{
@@ -124,14 +114,7 @@ void Level::drawLevel()
 			cout << levelPoints[i][j];
 		}
 		cout << endl;
-		
 	}
-	cout << snake.snakePoints.size() << endl;
-	cout << snake.snakePoints[0].Row << "  " << snake.snakePoints[0].Col << endl;
-	cout << snake.snakePoints[1].Row << "  " << snake.snakePoints[1].Col << endl;
-	
-
-
 }
 
 

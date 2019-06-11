@@ -3,6 +3,8 @@
 #include "point.h"
 #include "vector"
 
+
+// Enum for Movement directions for the snake
 enum SnakeDirection
 {
 	SnakeUp,
@@ -22,17 +24,13 @@ private:
 public:
 	Snake();
 	~Snake();
-
 	void updateSnake();
-	void initSnake();
-	void drawSnake();
 
 	int snakeLength;
-	Point initLocation;
+	int direction; // 0 = up, 1 = right; 2 = down , 3 = left
 
+	Point initLocation;
 	Point location;
 	std::vector<Point> snakePoints;
-
-	int direction; // 0 = up, 1 = right; 2 = down , 3 = left
 
 };

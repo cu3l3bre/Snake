@@ -27,23 +27,17 @@ int main()
 	double secondsPassed;
 
 
-
+	// Creating new object of class Level
 	Level lvl1;
-	//Snake snake1;
 
-	//snake1.drawBoundaries();
-	//snake1.updateLevel();
 
-	//snake1.initSnake();
-
-	
+	// Game Over Condition
 	while (1)
 	{
 		Sleep(300);
 		lvl1.updateLevel();
 		lvl1.drawLevel();
-		//snake1.drawSnake();
-		//snake1.updateLevel();
+
 
 
 
@@ -117,23 +111,3 @@ int main()
 	system("pause");
 	return 0;
 }
-
-/*
-
-Klasse Level/Map
-
-hat atrribute x und y als korrdinaten
-
-methoden
-
-createBoundaries
-
-drawBoundaries // Zeichnen die Umrandung der Karte basierend auf der LevelGrösse
-
-
-Klasse Snake
-
-
-
-Class Flood
-*/
