@@ -73,6 +73,8 @@ void Level::drawBoundaries()
 
 void Level::updateLevel()
 {
+	int snakeIndex = 0;
+
 
 	for (int i = 0; i < rows; i++)
 	{
@@ -82,19 +84,37 @@ void Level::updateLevel()
 			{
 				levelPoints[i][j] = BOUNDARY;
 			}
-			else if ((i == snake.location.Row) && (j == snake.location.Col))
+			else if (false)
 			{
-				levelPoints[i][j] = 'H';
-			}
-			else if (false) {
 
 			}
 			else {
 				levelPoints[i][j] = ' ';
 			}
+
+			// else if ((i == snake.location.Row) && (j == snake.location.Col))
+			
+			for (snakeIndex = 0; snakeIndex < snake.snakePoints.size(); snakeIndex++)
+			{
+				if ((i == snake.snakePoints[snakeIndex].Row) && (j == snake.snakePoints[snakeIndex].Col) &&
+					(snakeIndex == 0))
+				{
+					levelPoints[i][j] = 'H';
+					//snakeIndex++; // Need to check for limit?
+				}
+
+				else if ((i == snake.snakePoints[snakeIndex].Row) && (j == snake.snakePoints[snakeIndex].Col) &&
+					(snakeIndex > 0))
+				{
+					levelPoints[i][j] = 'B';
+					//snakeIndex++;
+				}
+			}
+
+
+
 		}
 	}
-
 	
 }
 
@@ -109,8 +129,11 @@ void Level::drawLevel()
 			cout << levelPoints[i][j];
 		}
 		cout << endl;
+		
 	}
-
+	cout << snake.snakePoints.size() << endl;
+	cout << snake.snakePoints[0].Row << "  " << snake.snakePoints[0].Col << endl;
+	cout << snake.snakePoints[1].Row << "  " << snake.snakePoints[1].Col << endl;
 	
 
 

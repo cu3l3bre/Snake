@@ -39,7 +39,7 @@ int main()
 		
 
 
-		// Cycle through directions depending on user input
+		// Cycle through directions depending on user input and actual direction
 		switch (userInput)
 		{
 		case 'a': lvl1.snake.direction -= 1; break;
@@ -47,9 +47,7 @@ int main()
 		default: lvl1.snake.direction = lvl1.snake.direction; break;
 		}
 
-	
-	
-
+		// Check for Overflow
 		if (lvl1.snake.direction == -1)
 		{
 			lvl1.snake.direction = 3;
@@ -60,18 +58,36 @@ int main()
 		}
 
 
+		//switch (lvl1.snake.direction)
+		//{
+		//	case SnakeUp: lvl1.snake.location.Row--; break;
+		//	case SnakeRight: lvl1.snake.location.Col++; break;
+		//	case SnakeDown: lvl1.snake.location.Row++; break;
+		//	case SnakeLeft: lvl1.snake.location.Col--; break;
+		//	default:break;
+		//}
+
+
+		lvl1.snake.updateSnake();
+
 		switch (lvl1.snake.direction)
 		{
-			case SnakeUp: lvl1.snake.location.Row--; break;
-			case SnakeRight: lvl1.snake.location.Col++; break;
-			case SnakeDown: lvl1.snake.location.Row++; break;
-			case SnakeLeft: lvl1.snake.location.Col--; break;
-			default:break;
+		case SnakeUp: lvl1.snake.snakePoints[0].Row--; break;
+		case SnakeRight: lvl1.snake.snakePoints[0].Col++; break;
+		case SnakeDown: lvl1.snake.snakePoints[0].Row++; break;
+		case SnakeLeft: lvl1.snake.snakePoints[0].Col--; break;
+		default:break;
 		}
 
+
+
+
+
+
+
 		//lvl1.snake.location.Col++;
-		if (lvl1.snake.location.Col > 8) {
-			lvl1.snake.location.Col = 1;
+		if (lvl1.snake.snakePoints[0].Col > 8) {
+			lvl1.snake.snakePoints[0].Col = 1;
 		}
 
 	}

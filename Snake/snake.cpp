@@ -9,18 +9,33 @@ Snake::Snake()
 {
 	/*initLocation.Row = rows / 2;
 	initLocation.Col = cols / 2;*/
-	snakeLength = 1;
+	snakeLength = 3;
 
 	initLocation.Row = 5;
 	initLocation.Col = 5;
 	location.Row = initLocation.Row;
 	location.Col = initLocation.Col;
 
-	direction = SnakeUp; // rechts
+	for (int i = 0; i < snakeLength; i++)
+	{
+		snakePoints.push_back(location);
+		location.Row++;
+	}
+
+	direction = SnakeUp; 
 }
 
 Snake::~Snake()
 {
+}
+
+void Snake::updateSnake()
+{
+	for (int i = (snakePoints.size()-1); i > 0; i--)
+	{
+		//snakePoints[1] = snakePoints[0];
+		snakePoints[i] = snakePoints[i-1];
+	}
 }
 
 
@@ -57,3 +72,4 @@ void Snake::drawSnake()
 		}
 	}*/
 }
+

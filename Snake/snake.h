@@ -1,6 +1,7 @@
 #pragma once
 
 #include "point.h"
+#include "vector"
 
 enum SnakeDirection
 {
@@ -22,6 +23,7 @@ public:
 	Snake();
 	~Snake();
 
+	void updateSnake();
 	void initSnake();
 	void drawSnake();
 
@@ -30,7 +32,8 @@ public:
 	//vector<Point> snake;
 
 	Point location;
+	std::vector<Point> snakePoints;
 
-	int direction; // 0 = oben, 1 = rechts; 2 = unten , 3 = links
+	int direction; // 0 = up, 1 = right; 2 = down , 3 = left
 
 };
