@@ -29,7 +29,6 @@ public:
 
 	int snakeLength;
 	Point initLocation;
-	//vector<Point> snake;
 
 	Point location;
 	std::vector<Point> snakePoints;

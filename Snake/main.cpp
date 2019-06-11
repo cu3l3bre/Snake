@@ -5,6 +5,9 @@
 #include "level.h"
 #include "snake.h"
 
+#include <ctime>
+
+
 #include "conio.h" // TODO Remove maybe
 using namespace std;
 
@@ -15,6 +18,16 @@ int main()
 
 	char userInput = char(0);
 
+
+	clock_t startTime = clock();
+
+	clock_t testTime;
+	
+	clock_t timePassed;
+	double secondsPassed;
+
+
+
 	Level lvl1;
 	//Snake snake1;
 
@@ -23,6 +36,7 @@ int main()
 
 	//snake1.initSnake();
 
+	
 	while (1)
 	{
 		Sleep(300);
@@ -32,10 +46,33 @@ int main()
 		//snake1.updateLevel();
 
 
+
+		testTime = clock();
+		timePassed = testTime - startTime;
+		secondsPassed = timePassed / (double)CLOCKS_PER_SEC;
+
+
+		if (secondsPassed > 2.0)
+		{
+			startTime = clock();
+		}
+
+		cout << "Actual time " << secondsPassed << endl;
+
+
+		/*
+		while (secondsPassed < 1.5)
+		{
+			userInput = _getch();
+		}
+		*/
+		userInput = _getch();
 		// TODO Timer laufen lassen in dem reagiert werden kann
-		cin >> userInput;
+		//cin >> userInput;
 		//userInput = _getch();
 		//while (_getch() != '\n');
+
+	
 		
 
 
@@ -58,18 +95,11 @@ int main()
 		}
 
 
-		//switch (lvl1.snake.direction)
-		//{
-		//	case SnakeUp: lvl1.snake.location.Row--; break;
-		//	case SnakeRight: lvl1.snake.location.Col++; break;
-		//	case SnakeDown: lvl1.snake.location.Row++; break;
-		//	case SnakeLeft: lvl1.snake.location.Col--; break;
-		//	default:break;
-		//}
-
-
+		// Copy Point Values from top to bottom in the vector
+		// new value will be written at 0
 		lvl1.snake.updateSnake();
 
+		// write new point vlaue in 0
 		switch (lvl1.snake.direction)
 		{
 		case SnakeUp: lvl1.snake.snakePoints[0].Row--; break;
@@ -78,18 +108,6 @@ int main()
 		case SnakeLeft: lvl1.snake.snakePoints[0].Col--; break;
 		default:break;
 		}
-
-
-
-
-
-
-
-		//lvl1.snake.location.Col++;
-		if (lvl1.snake.snakePoints[0].Col > 8) {
-			lvl1.snake.snakePoints[0].Col = 1;
-		}
-
 	}
 
 

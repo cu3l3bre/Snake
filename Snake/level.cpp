@@ -89,7 +89,7 @@ void Level::updateLevel()
 
 			}
 			else {
-				levelPoints[i][j] = ' ';
+				levelPoints[i][j] = EMPTYFIELD;
 			}
 
 			// else if ((i == snake.location.Row) && (j == snake.location.Col))
@@ -99,23 +99,18 @@ void Level::updateLevel()
 				if ((i == snake.snakePoints[snakeIndex].Row) && (j == snake.snakePoints[snakeIndex].Col) &&
 					(snakeIndex == 0))
 				{
-					levelPoints[i][j] = 'H';
-					//snakeIndex++; // Need to check for limit?
+					levelPoints[i][j] = SNAKEHEAD;
 				}
 
 				else if ((i == snake.snakePoints[snakeIndex].Row) && (j == snake.snakePoints[snakeIndex].Col) &&
 					(snakeIndex > 0))
 				{
-					levelPoints[i][j] = 'B';
+					levelPoints[i][j] = SNAKEBODY;
 					//snakeIndex++;
 				}
 			}
-
-
-
 		}
 	}
-	
 }
 
 void Level::drawLevel()
