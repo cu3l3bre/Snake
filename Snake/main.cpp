@@ -27,7 +27,7 @@ int main()
 
 	char userInput = char(0);
 
-	// Zufallsgenerator starten mit der aktuellen Uhrzeit als Startwert
+	// start RNG with actual time
 	srand(time(0));
 
 
@@ -67,6 +67,8 @@ int main()
 		if (!gameOver)
 		{
 
+
+
 			testTime = clock();
 			timePassed = testTime - startTime;
 			secondsPassed = timePassed / (double)CLOCKS_PER_SEC;
@@ -87,12 +89,26 @@ int main()
 			}
 			*/
 			//userInput = _getch();
-			userInput = cin.get();
-			cin.ignore();
+			//userInput = cin.get();
+			//cin.ignore();
 			// TODO Timer laufen lassen in dem reagiert werden kann
 			//cin >> userInput;
-			//userInput = _getch();
+		
+
+			// for some readon _getchar() has two informations when a button is pressed
+			// in order not to make a second move then
+			// we call _getch() a second time to get rid of the second information
+			// and so we only make one move
+			userInput = (char)_getch();
+			_getch();
+
+
+			//cin.ignore();
 			//while (_getch() != '\n');
+
+			//userInput = (char)getchar();
+
+
 
 
 
@@ -101,9 +117,9 @@ int main()
 			// Cycle through directions depending on user input and actual direction
 			switch (userInput)
 			{
-			case 'a': lvl1.snake.direction -= 1; break;
-			case 'd': lvl1.snake.direction += 1; break;
-			default: lvl1.snake.direction = lvl1.snake.direction; break;
+				case 'a': lvl1.snake.direction -= 1; break;
+				case 'd': lvl1.snake.direction += 1; break;
+				default: lvl1.snake.direction = lvl1.snake.direction; break;
 			}
 
 			// Check for Overflow
@@ -139,7 +155,7 @@ int main()
 		}
 		else
 		{
-			cout << "GAME OVER!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+			cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!! GAME OVER !!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 		}
 	}
 

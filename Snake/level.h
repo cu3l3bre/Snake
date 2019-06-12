@@ -13,9 +13,9 @@
 
 
 #define EMPTYFIELD char(0);
-#define BOUNDARY 'X';
-#define SNAKEHEAD 'H';
-#define SNAKEBODY 'B';
+#define BOUNDARY '#';
+#define SNAKEHEAD 'X';
+#define SNAKEBODY '0';
 #define FOOD char(148);
 
 using namespace std;
