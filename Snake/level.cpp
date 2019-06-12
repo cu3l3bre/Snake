@@ -118,3 +118,36 @@ void Level::drawLevel()
 }
 
 
+
+// GameOver is When Head of Snake is in its body or boundaries
+bool Level::checkGameOver()
+{
+	bool gameOver = false;
+	// Starts at 1 because Head is 0
+	for (int i = 1; i < snake.snakePoints.size(); i++)
+	{	
+		// Check if snakes head is its body
+		if ((snake.snakePoints[0].Row) ==  (snake.snakePoints[i].Row) &&
+			(snake.snakePoints[0].Col) == (snake.snakePoints[i].Col))
+		{
+			gameOver = true;
+		}
+		// Check if snakes head is in boundaries
+		else if((snake.snakePoints[0].Row == 0) || (snake.snakePoints[0].Row == rows-1) || 
+			(snake.snakePoints[0].Col == 0) || (snake.snakePoints[0].Col == cols-1))
+		{
+			gameOver = true;
+		}
+	}
+
+	if (gameOver == true)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
