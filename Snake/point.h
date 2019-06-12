@@ -11,8 +11,8 @@
 class Point
 {
 public:
-	int Row;
-	int Col;
+	int row;
+	int col;
 
 	Point();
 	~Point();

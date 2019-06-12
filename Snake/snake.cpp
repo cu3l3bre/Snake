@@ -12,18 +12,18 @@
 
 Snake::Snake()
 {
-	snakeLength = 6;
+	snakeLength = 3;
 
-	initLocation.Row = 5;
-	initLocation.Col = 5;
-	location.Row = initLocation.Row;
-	location.Col = initLocation.Col;
+	initLocation.row = 5;
+	initLocation.col = 5;
+	location.row = initLocation.row;
+	location.col = initLocation.col;
 
 	// Generate the head and body for the snake in a vertical line
 	for (int i = 0; i < snakeLength; i++)
 	{
 		snakePoints.push_back(location);
-		location.Row++;
+		location.row++;
 	}
 
 	// StartDirection in which the snake will move at the beginning
@@ -46,4 +46,7 @@ void Snake::updateSnake()
 		snakePoints[i] = snakePoints[i-1];
 	}
 }
+
+
+
 

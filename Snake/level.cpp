@@ -74,25 +74,23 @@ void Level::updateLevel()
 			{
 				levelPoints[i][j] = BOUNDARY;
 			}
-			else if (false)
+			else if ((i == foodLocation.row) && (j == foodLocation.col))
 			{
-
+				levelPoints[i][j] = FOOD;
 			}
 			else {
 				levelPoints[i][j] = EMPTYFIELD;
 			}
 
-			// else if ((i == snake.location.Row) && (j == snake.location.Col))
-			
 			for (snakeIndex = 0; snakeIndex < snake.snakePoints.size(); snakeIndex++)
 			{
-				if ((i == snake.snakePoints[snakeIndex].Row) && (j == snake.snakePoints[snakeIndex].Col) &&
+				if ((i == snake.snakePoints[snakeIndex].row) && (j == snake.snakePoints[snakeIndex].col) &&
 					(snakeIndex == 0))
 				{
 					levelPoints[i][j] = SNAKEHEAD;
 				}
 
-				else if ((i == snake.snakePoints[snakeIndex].Row) && (j == snake.snakePoints[snakeIndex].Col) &&
+				else if ((i == snake.snakePoints[snakeIndex].row) && (j == snake.snakePoints[snakeIndex].col) &&
 					(snakeIndex > 0))
 				{
 					levelPoints[i][j] = SNAKEBODY;
@@ -126,15 +124,15 @@ bool Level::checkGameOver()
 	// Starts at 1 because Head is 0
 	for (int i = 1; i < snake.snakePoints.size(); i++)
 	{	
-		// Check if snakes head is its body
-		if ((snake.snakePoints[0].Row) ==  (snake.snakePoints[i].Row) &&
-			(snake.snakePoints[0].Col) == (snake.snakePoints[i].Col))
+		// Check if snakes head is in its body
+		if ((snake.snakePoints[0].row) ==  (snake.snakePoints[i].row) &&
+			(snake.snakePoints[0].col) == (snake.snakePoints[i].col))
 		{
 			gameOver = true;
 		}
 		// Check if snakes head is in boundaries
-		else if((snake.snakePoints[0].Row == 0) || (snake.snakePoints[0].Row == rows-1) || 
-			(snake.snakePoints[0].Col == 0) || (snake.snakePoints[0].Col == cols-1))
+		else if((snake.snakePoints[0].row == 0) || (snake.snakePoints[0].row == rows-1) || 
+			(snake.snakePoints[0].col == 0) || (snake.snakePoints[0].col == cols-1))
 		{
 			gameOver = true;
 		}
@@ -148,6 +146,59 @@ bool Level::checkGameOver()
 	{
 		return false;
 	}
+}
+
+
+// Generate food at random location
+void Level::generateFood()
+{
+	bool foodGeneratedOnSnake = true;
+	
+	while (foodGeneratedOnSnake)
+	{
+		bool foodOnSnake = false;
+
+		// example
+		// rows = 10;
+		// boundaries are on 0 and 9
+		// with %8 we would get numbers from 0 to 7
+		// thats why we add +1 and we get numbers from 1 to 8 which are in the field
+
+
+		foodLocation.row = (rand() % (rows - 2)) + 1;		// -2 because we dont want to spawn it on the boundaries
+		foodLocation.col = (rand() % (cols - 2)) + 1;
+
+		// check if food has been generated on snake
+		for (int i = 0; i < snake.snakePoints.size(); i++)
+		{
+			if ((snake.snakePoints[i].row == foodLocation.row) && (snake.snakePoints[i].col == foodLocation.col))
+			{
+				foodOnSnake = true;
+			}
+		}
+
+		if (foodOnSnake)
+		{
+			// excute while loop one more time
+			foodGeneratedOnSnake = true;
+		}
+		else
+		{
+			// exit the while loop
+			foodGeneratedOnSnake = false;
+		}
+	}
+}
+
+
+//add new body part to snake if it has eaten some food
+void Level::eatFood()
+{
+	foodOnField = false;
+	Point newBodyPart;
+	newBodyPart.row = 0;
+	newBodyPart.col = 0;
+	snake.snakePoints.push_back(newBodyPart);
 }
 
 

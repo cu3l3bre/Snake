@@ -12,6 +12,7 @@
 
 #include "level.h"
 #include "snake.h"
+#include "time.h"
 
 #include <ctime>
 
@@ -25,6 +26,10 @@ int main()
 	cout << "This is a Snake Game" << endl << endl;
 
 	char userInput = char(0);
+
+	// Zufallsgenerator starten mit der aktuellen Uhrzeit als Startwert
+	srand(time(0));
+
 
 
 	clock_t startTime = clock();
@@ -43,6 +48,13 @@ int main()
 	while (!gameOver)
 	{
 		Sleep(300);
+
+		if (!lvl1.foodOnField)
+		{
+			lvl1.generateFood();
+			lvl1.foodOnField = true;
+		}
+
 		lvl1.updateLevel();
 		lvl1.drawLevel();
 		
@@ -104,6 +116,12 @@ int main()
 				lvl1.snake.direction = 0;
 			}
 
+			// Check if snake has found some food and let it grow
+			if ((lvl1.foodLocation.row == lvl1.snake.snakePoints[0].row) && (lvl1.foodLocation.col == lvl1.snake.snakePoints[0].col))
+			{
+				lvl1.eatFood();
+			}
+
 
 			// Copy Point Values from top to bottom in the vector
 			// new value will be written at 0
@@ -112,10 +130,10 @@ int main()
 			// write new point vlaue in 0
 			switch (lvl1.snake.direction)
 			{
-			case SnakeUp: lvl1.snake.snakePoints[0].Row--; break;
-			case SnakeRight: lvl1.snake.snakePoints[0].Col++; break;
-			case SnakeDown: lvl1.snake.snakePoints[0].Row++; break;
-			case SnakeLeft: lvl1.snake.snakePoints[0].Col--; break;
+			case SnakeUp: lvl1.snake.snakePoints[0].row--; break;
+			case SnakeRight: lvl1.snake.snakePoints[0].col++; break;
+			case SnakeDown: lvl1.snake.snakePoints[0].row++; break;
+			case SnakeLeft: lvl1.snake.snakePoints[0].col--; break;
 			default:break;
 			}
 		}

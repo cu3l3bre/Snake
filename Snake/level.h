@@ -16,6 +16,7 @@
 #define BOUNDARY 'X';
 #define SNAKEHEAD 'H';
 #define SNAKEBODY 'B';
+#define FOOD char(148);
 
 using namespace std;
 
@@ -31,12 +32,17 @@ public:
 	Level(int, int);
 	~Level();
 
-	int rows = 10;
-	int cols = 10;
+	int rows = 20;
+	int cols = 20;
 	int points;
 	//vector<int> levelPoints;
-	char levelPoints[10][10];
+	char levelPoints[20][20];
 	Snake snake;
+
+
+	Point foodLocation;
+	bool foodOnField = false;
+
 
 	// Getter
 
@@ -51,5 +57,6 @@ public:
 	void drawLevel();
 	bool checkGameOver();
 
-
+	void generateFood();
+	void eatFood();
 };
