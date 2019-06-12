@@ -17,6 +17,9 @@ Level::Level()
 {
 	points = rows * cols;
 
+	foodCount = 0;
+	score = 0.0;
+
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < cols; j++)
@@ -199,6 +202,15 @@ void Level::eatFood()
 	newBodyPart.row = 0;
 	newBodyPart.col = 0;
 	snake.snakePoints.push_back(newBodyPart);
+	foodCount++;
+}
+
+
+
+void Level::calculateScore()
+{
+	score = foodCount - (timeElapsed*0.4);
+
 }
 
 

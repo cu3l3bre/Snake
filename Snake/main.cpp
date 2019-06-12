@@ -5,6 +5,8 @@
 //																							//
 //////////////////////////////////////////////////////////////////////////////////////////////
 
+// TODO calculate points and show highscore
+
 
 #include <iostream>
 
@@ -21,34 +23,90 @@
 using namespace std;
 
 
+
+// TODO put this into a class method
+// found on the net
+// link
+// https://www.quora.com/Is-there-a-way-to-skip-the-input-from-a-user-if-a-certain-time-is-exceeded-in-C++
+
+
+char get_char(float time_limit)
+{
+	
+	char res;
+
+	time_t start = time(NULL); //start the clock
+	while (!_kbhit()) {
+		//compare the clock with current time, if it exceeds return -1;
+		if ((time(NULL) - start) >= time_limit)
+			return -1;
+	}
+
+
+	// TODO fast input remains
+	//else return the value stored in keyboard buffer.
+
+
+	res = _getch();
+	_getch();
+
+	
+	time_t timeToSleep = time_limit- (time(NULL) - start);
+	// TODO Set Sleep here, time difference depending on how long it took the user to press a button
+	Sleep(timeToSleep*1000);
+
+	return res;
+}
+
+
+
 int main()
 {
 	cout << "This is a Snake Game" << endl << endl;
+	cout << "Press any key to begin" << endl;
+	_getch();
+	_getch();
 
 	char userInput = char(0);
 
 	// start RNG with actual time
 	srand(time(0));
 
-
-
+/*
 	clock_t startTime = clock();
 
 	clock_t testTime;
 	
 	clock_t timePassed;
-	double secondsPassed;
+	double secondsPassed = 0.0;
+	*/
+
+	
+
+
+
+
+
+
+
+
+
 
 
 	// Creating new object of class Level
 	Level lvl1;
 	bool gameOver = false;
 
+	//startTime = clock();
+
+	lvl1.gameStartTime = time(0);
+
 	// Game Over Condition
 	while (!gameOver)
 	{
 		Sleep(300);
-
+	
+		
 		if (!lvl1.foodOnField)
 		{
 			lvl1.generateFood();
@@ -57,7 +115,7 @@ int main()
 
 		lvl1.updateLevel();
 		lvl1.drawLevel();
-		
+	
 
 		gameOver = lvl1.checkGameOver();
 
@@ -67,51 +125,41 @@ int main()
 		if (!gameOver)
 		{
 
+			// TODO maybe remove this 
 
+			//cout << "Enter something in 3 sec :";
+			//userInput = get_char(3); //passing time_limit = 1000 milliseconds
 
-			testTime = clock();
-			timePassed = testTime - startTime;
-			secondsPassed = timePassed / (double)CLOCKS_PER_SEC;
+			//if (userInput == -1)
+			//{
+			//	cout << "Time limit exceeded. Try again later." << endl;
+			//}
+			//else
+			//{
+			//	cout << "Character is : " << userInput << endl;
+			//}
 
-
-			if (secondsPassed > 2.0)
-			{
-				startTime = clock();
+			
+			if (_kbhit()) {
+				userInput = (char)_getch();
+				_getch();
+			}
+			else {
+				userInput = ' ';
 			}
 
-			cout << "Actual time " << secondsPassed << endl;
 
 
-			/*
-			while (secondsPassed < 1.5)
-			{
-				userInput = _getch();
-			}
-			*/
-			//userInput = _getch();
-			//userInput = cin.get();
-			//cin.ignore();
-			// TODO Timer laufen lassen in dem reagiert werden kann
-			//cin >> userInput;
-		
-
-			// for some readon _getchar() has two informations when a button is pressed
+			// This works so far !!!!
+			// for some reason _getchar() has two informations when a button is pressed
 			// in order not to make a second move then
 			// we call _getch() a second time to get rid of the second information
 			// and so we only make one move
-			userInput = (char)_getch();
-			_getch();
-
-
-			//cin.ignore();
-			//while (_getch() != '\n');
-
-			//userInput = (char)getchar();
-
-
-
-
-
+		
+			
+			//userInput = (char)_getch();
+			//_getch();
+			
 
 
 			// Cycle through directions depending on user input and actual direction
@@ -155,12 +203,43 @@ int main()
 		}
 		else
 		{
+			/*
+			testTime = clock();
+			timePassed = testTime - startTime;
+			secondsPassed = timePassed / (double)CLOCKS_PER_SEC;
+			*/
+			
+			
+			
+			lvl1.timeNow = time(0);
+			lvl1.timeElapsed = lvl1.timeNow - lvl1.gameStartTime;
+
+
+			localtime_s(&lvl1.nowLocal, &lvl1.timeNow);
+
+			lvl1.year = lvl1.nowLocal.tm_year + 1900;
+			lvl1.month = lvl1.nowLocal.tm_mon + 1;
+			lvl1.day = lvl1.nowLocal.tm_mday;
+			lvl1.hour = lvl1.nowLocal.tm_hour;
+			lvl1.minute = lvl1.nowLocal.tm_min;
+			lvl1.seconds = lvl1.nowLocal.tm_sec;
+
+			lvl1.calculateScore();
+
 			cout << "!!!!!!!!!!!!!!!!!!!!!!!!!!! GAME OVER !!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
+			cout << "Your Run lastet " << lvl1.timeElapsed << " seconds! and ate " << lvl1.foodCount << " Food! Good Job :)" << endl;
+			cout << "Your total score is: " << lvl1.score << " Keep up the good work!" << endl;
+			cout << "Played on " << lvl1.day << "." << lvl1.month << "." << lvl1.year << " at " << lvl1.hour << ":" << lvl1.minute << ":" << lvl1.seconds << endl;
+			
+
 		}
+
+
+
+
+
+
 	}
-
-
-
 
 
 	system("pause");

@@ -42,6 +42,20 @@ public:
 
 	Point foodLocation;
 	bool foodOnField = false;
+	int foodCount;
+	double score;
+
+
+	time_t timeElapsed;
+	tm nowLocal;
+	time_t timeNow;
+	time_t gameStartTime;
+	int year;
+	int month;
+	int day;
+	int hour;
+	int minute;
+	int seconds;
 
 
 	// Getter
@@ -59,4 +73,6 @@ public:
 
 	void generateFood();
 	void eatFood();
+
+	void calculateScore();
 };
