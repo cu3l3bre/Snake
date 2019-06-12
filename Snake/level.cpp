@@ -209,8 +209,7 @@ void Level::eatFood()
 
 void Level::calculateScore()
 {
-	score = foodCount - (timeElapsed*0.4);
-
+	score = (((foodCount+1)*10) - (timeElapsed*0.4))*100;
 }
 
 

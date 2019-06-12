@@ -23,7 +23,7 @@
 using namespace std;
 
 
-
+//**********************************************************************************************************************
 // TODO put this into a class method
 // found on the net
 // link
@@ -57,9 +57,11 @@ char get_char(float time_limit)
 
 	return res;
 }
+//**********************************************************************************************************************
 
 
 
+// main function
 int main()
 {
 	cout << "This is a Snake Game" << endl << endl;
@@ -72,32 +74,11 @@ int main()
 	// start RNG with actual time
 	srand(time(0));
 
-/*
-	clock_t startTime = clock();
-
-	clock_t testTime;
-	
-	clock_t timePassed;
-	double secondsPassed = 0.0;
-	*/
-
-	
-
-
-
-
-
-
-
-
-
-
 
 	// Creating new object of class Level
 	Level lvl1;
 	bool gameOver = false;
 
-	//startTime = clock();
 
 	lvl1.gameStartTime = time(0);
 
@@ -156,11 +137,9 @@ int main()
 			// we call _getch() a second time to get rid of the second information
 			// and so we only make one move
 		
-			
 			//userInput = (char)_getch();
 			//_getch();
 			
-
 
 			// Cycle through directions depending on user input and actual direction
 			switch (userInput)
@@ -203,14 +182,6 @@ int main()
 		}
 		else
 		{
-			/*
-			testTime = clock();
-			timePassed = testTime - startTime;
-			secondsPassed = timePassed / (double)CLOCKS_PER_SEC;
-			*/
-			
-			
-			
 			lvl1.timeNow = time(0);
 			lvl1.timeElapsed = lvl1.timeNow - lvl1.gameStartTime;
 
